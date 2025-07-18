@@ -1,26 +1,21 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import TermsPage from './pages/TermsPage';
-import CoverPage from './components/CoverPage';
+import Header from './components/Header';
+import Footer from './components/Footer';
 
 function App() {
-  const [showCover, setShowCover] = useState(true);
-
-  const handleStartCall = () => {
-    setShowCover(false);
-  };
-
   return (
     <Router>
       <div className="min-h-screen bg-white flex flex-col">
         <Routes>
           <Route path="/" element={
-            showCover ? (
-              <CoverPage onStartCall={handleStartCall} />
-            ) : (
+            <>
+              <Header isConnected={false} />
               <HomePage />
-            )
+              <Footer />
+            </>
           } />
           <Route path="/terms" element={<TermsPage />} />
         </Routes>
