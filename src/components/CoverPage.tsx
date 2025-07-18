@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import { Phone } from 'lucide-react';
 
 interface CoverPageProps {
@@ -7,9 +8,14 @@ interface CoverPageProps {
 
 const CoverPage: React.FC<CoverPageProps> = ({ onStartCall }) => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-cyan-50 flex flex-col">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 flex flex-col">
       {/* Header */}
-      <div className="p-4 sm:p-6 lg:p-8">
+      <motion.div 
+        className="p-4 sm:p-6 lg:p-8"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+      >
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-3">
             <a 
@@ -30,104 +36,127 @@ const CoverPage: React.FC<CoverPageProps> = ({ onStartCall }) => {
             </a>
           </div>
         </div>
-      </div>
+      </motion.div>
 
       {/* Main Content */}
       <div className="flex-1 flex items-center justify-center px-4 sm:px-6 lg:px-8">
         <div className="text-center w-full max-w-2xl">
           {/* Hero Text */}
-          <div className="mb-8 sm:mb-12 lg:mb-16">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-900 mb-4 sm:mb-6">
+          <motion.div 
+            className="mb-8 sm:mb-12 lg:mb-16"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
+          >
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-light text-gray-900 mb-6 sm:mb-8 tracking-tight">
               AI Röstassistent
             </h2>
-            <p className="text-lg sm:text-xl lg:text-2xl text-gray-600 mb-6 sm:mb-8 leading-relaxed">
-              Prata direkt med vår AI-assistent för att boka tjänster, få information eller ställa frågor
+            <p className="text-xl sm:text-2xl text-gray-500 mb-8 sm:mb-12 leading-relaxed font-light max-w-3xl mx-auto">
+              Naturlig konversation med AI
             </p>
-            <div className="flex flex-wrap justify-center gap-4 text-sm sm:text-base text-gray-500">
-              <div className="flex items-center space-x-2">
-                <div className="w-2 h-2 bg-emerald-500 rounded-full"></div>
-                <span>Säker anslutning</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                <span>Realtidssamtal</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
-                <span>AI-driven</span>
-              </div>
-            </div>
-          </div>
+          </motion.div>
 
           {/* Call Button - Copy of VoiceOrb design */}
-          <div className="relative mb-6 sm:mb-8 lg:mb-12">
+          <motion.div 
+            className="relative mb-12 sm:mb-16 lg:mb-20"
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ 
+              duration: 1.2, 
+              delay: 0.4, 
+              type: "spring", 
+              stiffness: 100, 
+              damping: 15 
+            }}
+          >
             {/* Enhanced gradient orb */}
-            <div className="w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96 xl:w-[400px] xl:h-[400px] mx-auto rounded-full transition-all duration-500 will-change-transform bg-gradient-to-br from-blue-400 via-cyan-500 to-teal-600 shadow-2xl relative overflow-hidden hover:scale-105 cursor-pointer group"
-                 onClick={onStartCall}>
-              <div className="absolute inset-3 sm:inset-4 lg:inset-6 rounded-full bg-gradient-to-br from-white/20 to-transparent"></div>
+            <motion.div 
+              className="w-48 h-48 sm:w-64 sm:h-64 lg:w-80 lg:h-80 mx-auto rounded-full bg-gradient-to-br from-blue-500 via-indigo-600 to-purple-700 shadow-2xl relative overflow-hidden cursor-pointer group"
+              onClick={onStartCall}
+              whileHover={{ 
+                scale: 1.05,
+                boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)"
+              }}
+              whileTap={{ scale: 0.95 }}
+              transition={{ type: "spring", stiffness: 300, damping: 20 }}
+            >
+              <div className="absolute inset-2 sm:inset-3 lg:inset-4 rounded-full bg-gradient-to-br from-white/10 to-transparent"></div>
               
               {/* Central button */}
               <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 bg-black/80 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-black/90 active:scale-95 transition-all duration-200 shadow-xl group-hover:scale-110 touch-manipulation will-change-transform">
-                  <Phone size={window.innerWidth < 640 ? 20 : window.innerWidth < 1024 ? 24 : 28} className="transition-transform" />
-                </div>
+                <motion.div 
+                  className="w-12 h-12 sm:w-16 sm:h-16 lg:w-20 lg:h-20 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center text-gray-900 shadow-xl"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                >
+                  <Phone size={20} className="sm:w-6 sm:h-6 lg:w-7 lg:h-7" />
+                </motion.div>
               </div>
 
-              {/* Animated rings */}
-              <div className="absolute inset-0 rounded-full border-2 sm:border-4 border-white/20 animate-ping will-change-transform"></div>
-              <div className="absolute inset-6 sm:inset-8 lg:inset-12 rounded-full border border-white/10 sm:border-2 animate-ping animation-delay-200 will-change-transform"></div>
-            </div>
+              {/* Physics-based floating rings */}
+              <motion.div 
+                className="absolute inset-0 rounded-full border border-white/30"
+                animate={{ 
+                  scale: [1, 1.2, 1],
+                  opacity: [0.3, 0, 0.3]
+                }}
+                transition={{ 
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+              />
+              <motion.div 
+                className="absolute inset-4 sm:inset-6 lg:inset-8 rounded-full border border-white/20"
+                animate={{ 
+                  scale: [1, 1.3, 1],
+                  opacity: [0.2, 0, 0.2]
+                }}
+                transition={{ 
+                  duration: 3,
+                  delay: 1,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+              />
+            </motion.div>
 
             {/* Status label */}
-            <div className="absolute -bottom-12 sm:-bottom-16 lg:-bottom-20 left-1/2 transform -translate-x-1/2 w-full px-4">
-              <div className="bg-black/80 backdrop-blur-sm text-white px-3 py-2 sm:px-4 sm:py-2 lg:px-6 lg:py-3 rounded-full text-xs sm:text-sm lg:text-base font-medium shadow-lg mx-auto max-w-fit">
-                Tryck för att starta samtal
+            <motion.div 
+              className="absolute -bottom-16 sm:-bottom-20 left-1/2 transform -translate-x-1/2 w-full px-4"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.8 }}
+            >
+              <div className="bg-gray-900/80 backdrop-blur-sm text-white px-4 py-2 sm:px-6 sm:py-3 rounded-full text-sm font-light shadow-lg mx-auto max-w-fit">
+                Tryck för att börja
               </div>
-            </div>
-          </div>
-
-          {/* Features */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 mt-12 sm:mt-16">
-            <div className="text-center">
-              <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                <Phone size={20} className="text-blue-600" />
-              </div>
-              <h3 className="font-semibold text-gray-900 mb-2">Röstsamtal</h3>
-              <p className="text-sm text-gray-600">Naturlig konversation med AI</p>
-            </div>
-            <div className="text-center">
-              <div className="w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                <div className="w-3 h-3 bg-emerald-600 rounded-full animate-pulse"></div>
-              </div>
-              <h3 className="font-semibold text-gray-900 mb-2">Realtid</h3>
-              <p className="text-sm text-gray-600">Omedelbar respons och interaktion</p>
-            </div>
-            <div className="text-center">
-              <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                <div className="w-4 h-4 border-2 border-purple-600 border-t-transparent rounded-full animate-spin"></div>
-              </div>
-              <h3 className="font-semibold text-gray-900 mb-2">Smart AI</h3>
-              <p className="text-sm text-gray-600">Avancerad språkförståelse</p>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
       </div>
 
       {/* Footer */}
-      <div className="p-4 sm:p-6 lg:p-8 text-center">
+      <motion.div 
+        className="p-4 sm:p-6 lg:p-8 text-center"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1, delay: 1 }}
+      >
         <div className="flex flex-col items-center space-y-3">
           <div className="flex items-center justify-center space-x-2 text-gray-500">
-            <span className="text-xs sm:text-sm">Powered by</span>
+            <span className="text-xs sm:text-sm font-light">Powered by</span>
             <img 
               src="https://www.axiestudio.se/logo.jpg" 
               alt="Axie Studio" 
               className="w-3 h-3 sm:w-4 sm:h-4 rounded object-cover"
               loading="lazy"
             />
-            <span className="text-xs sm:text-sm font-medium">Axie Studio AI</span>
+            <span className="text-xs sm:text-sm font-light">Axie Studio AI</span>
           </div>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 };
